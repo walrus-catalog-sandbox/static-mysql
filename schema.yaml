@@ -5,6 +5,7 @@ components:
   schemas:
     variables:
       required:
+      - hosts
       - database
       - password
       - username
@@ -25,23 +26,20 @@ components:
             group: Advanced
             hidden: true
             order: 1
-        selector:
-          title: Selector
-          type: object
-          description: The selector, a map, which is used for dependencies or collaborations.
-          default: {}
-          additionalProperties:
-            type: object
-            x-walrus-ui:
-              colSpan: 12
+        hosts:
+          title: Hosts
+          type: array
+          description: The host list of the MySQL service.
+          items:
+            type: string
           x-walrus-ui:
             colSpan: 12
             group: Basic
             order: 2
-        endpoint_internal:
-          title: Endpoint Internal
+        hosts_readonly:
+          title: Hosts Readonly
           type: array
-          description: The internal endpoints of the resource.
+          description: The readonly host list of the MySQL service.
           default: []
           items:
             type: string
@@ -49,21 +47,18 @@ components:
             colSpan: 12
             group: Basic
             order: 3
-        endpoint_internal_readonly:
-          title: Endpoint Internal Readonly
-          type: array
-          description: The internal readonly endpoints of the resource.
-          default: []
-          items:
-            type: string
+        port:
+          title: Port
+          type: number
+          description: The port of the MySQL service.
+          default: 5432
           x-walrus-ui:
-            colSpan: 12
             group: Basic
             order: 4
         database:
           title: Database
           type: string
-          description: The name of the mysql database to access.
+          description: The name of the MySQL database to access.
           x-walrus-ui:
             group: Basic
             order: 5

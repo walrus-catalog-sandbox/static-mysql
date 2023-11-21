@@ -24,26 +24,29 @@ EOF
   default     = {}
 }
 
-variable "selector" {
-  description = "The selector, a map, which is used for dependencies or collaborations."
-  type        = map(any)
-  default     = {}
+#
+# Connection Fields
+#
+
+variable "hosts" {
+  description = "The host list of the MySQL service."
+  type        = list(string)
 }
 
-variable "endpoint_internal" {
-  description = "The internal endpoints of the resource."
+variable "hosts_readonly" {
+  description = "The readonly host list of the MySQL service."
   type        = list(string)
   default     = []
 }
 
-variable "endpoint_internal_readonly" {
-  description = "The internal readonly endpoints of the resource."
-  type        = list(string)
-  default     = []
+variable "port" {
+  description = "The port of the MySQL service."
+  type        = number
+  default     = 3306
 }
 
 variable "database" {
-  description = "The name of the mysql database to access."
+  description = "The name of the MySQL database to access."
   type        = string
 }
 
