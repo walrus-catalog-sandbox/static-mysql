@@ -1,3 +1,12 @@
+locals {
+  endpoints = flatten([
+    for c in var.hosts : format("%s:%d", c, var.port)
+  ])
+  endpoints_readonly = flatten([
+    for c in(var.hosts_readonly != null ? var.hosts_readonly : []) : format("%s:%d", c, var.port)
+  ])
+}
+
 #
 # Orchestration
 #
@@ -13,13 +22,15 @@ output "refer" {
   value = {
     schema = "static:mysql"
     params = {
-      selector       = {}
-      hosts          = var.hosts
-      hosts_readonly = var.hosts_readonly
-      port           = var.port
-      database       = var.database
-      username       = var.username
-      password       = nonsensitive(var.password)
+      selector           = {}
+      hosts              = var.hosts
+      hosts_readonly     = var.hosts_readonly
+      port               = var.port
+      endpoints          = local.endpoints
+      endpoints_readonly = local.endpoints_readonly
+      database           = var.database
+      username           = var.username
+      password           = nonsensitive(var.password)
     }
   }
 }
@@ -28,23 +39,9 @@ output "refer" {
 # Reference
 #
 
-locals {
-  endpoints = flatten([
-    for c in var.hosts : format("%s:%d", c, var.port)
-  ])
-  endpoints_readonly = flatten([
-    for c in(var.hosts_readonly != null ? var.hosts_readonly : []) : format("%s:%d", c, var.port)
-  ])
-}
-
 output "connection" {
   description = "The connection, a string combined host and port, might be a comma separated string or a single string."
   value       = join(",", local.endpoints)
-}
-
-output "connection_without_port" {
-  description = "The connection without port, a string combined host, might be a comma separated string or a single string."
-  value       = join(",", var.hosts)
 }
 
 output "connection_readonly" {
@@ -52,9 +49,19 @@ output "connection_readonly" {
   value       = join(",", local.endpoints_readonly)
 }
 
-output "connection_without_port_readonly" {
-  description = "The readonly connection without port, a string combined host, might be a comma separated string or a single string."
+output "address" {
+  description = "The address, a string only has host, might be a comma separated string or a single string."
+  value       = join(",", var.hosts)
+}
+
+output "address_readonly" {
+  description = "The readonly host, a string only has host, might be a comma separated string or a single string."
   value       = join(",", var.hosts_readonly)
+}
+
+output "port" {
+  description = "The port of the service."
+  value       = var.port
 }
 
 output "database" {

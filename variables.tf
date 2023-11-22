@@ -48,6 +48,7 @@ variable "port" {
 variable "database" {
   description = "The name of the MySQL database to access."
   type        = string
+  default     = ""
 }
 
 variable "username" {
