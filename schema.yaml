@@ -52,11 +52,11 @@ components:
           title: Port
           type: number
           description: The port of the MySQL service.
-          default: 5432
+          default: 3306
           nullable: true
           x-walrus-ui:
             group: Basic
-            order: 4
+            order: 7
         database:
           title: Database
           type: string
@@ -65,14 +65,14 @@ components:
           nullable: true
           x-walrus-ui:
             group: Basic
-            order: 5
+            order: 6
         username:
           title: Username
           type: string
           description: The username of the account to access the database.
           x-walrus-ui:
             group: Basic
-            order: 6
+            order: 4
         password:
           title: Password
           type: string
@@ -81,7 +81,7 @@ components:
           writeOnly: true
           x-walrus-ui:
             group: Basic
-            order: 7
+            order: 5
       x-walrus-ui:
         groupOrder: 
         - Basic
