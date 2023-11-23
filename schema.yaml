@@ -16,6 +16,7 @@ components:
           description: |
             Receive contextual information. When Walrus deploys, Walrus will inject specific contextual information into this field.
           default: {}
+          nullable: true
           additionalProperties:
             type: object
             x-walrus-ui:
@@ -40,6 +41,7 @@ components:
           type: array
           description: The readonly host list of the MySQL service.
           default: []
+          nullable: true
           items:
             type: string
           x-walrus-ui:
@@ -51,14 +53,16 @@ components:
           type: number
           description: The port of the MySQL service.
           default: 5432
+          nullable: true
           x-walrus-ui:
             group: Basic
             order: 4
         database:
           title: Database
           type: string
-          default: ""
           description: The name of the MySQL database to access.
+          default: ""
+          nullable: true
           x-walrus-ui:
             group: Basic
             order: 5
