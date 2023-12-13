@@ -4,11 +4,11 @@ info:
 components:
   schemas:
     variables:
+      type: object
       required:
       - hosts
       - password
       - username
-      type: object
       properties:
         context:
           title: Context
@@ -41,9 +41,9 @@ components:
           type: array
           description: The readonly host list of the MySQL service.
           default: []
-          nullable: true
           items:
             type: string
+          nullable: true
           x-walrus-ui:
             colSpan: 12
             group: Basic
@@ -83,6 +83,6 @@ components:
             group: Basic
             order: 5
       x-walrus-ui:
-        groupOrder: 
+        groupOrder:
         - Basic
         - Advanced
